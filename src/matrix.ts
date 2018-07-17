@@ -9,34 +9,6 @@ export interface Matrix {
     toString(): string;
 }
 
-export interface OrthographicOptions {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-
-    near: number;
-    far: number;
-}
-
-export interface FrustumOptions {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-
-    near: number;
-    far: number;
-}
-
-export interface PerspectiveOptions {
-    fovYRadian: number;
-    aspectRatio: number;
-
-    near: number;
-    far: number;
-}
-
 
 export class Matrix2x2 implements Matrix {
     protected _values: Float32Array;
@@ -335,7 +307,8 @@ export class Matrix4x4 implements Matrix {
         );
     }
 
-    static orthographic(options: OrthographicOptions): Matrix4x4 {
+
+    static orthographic(options: {top: number, bottom: number, left: number, right: number, near: number, far: number}): Matrix4x4 {
         const top: number = options.top;
         const bottom: number = options.bottom;
         const left: number = options.left;
@@ -352,7 +325,7 @@ export class Matrix4x4 implements Matrix {
     }
 
 
-    static frustum(options: FrustumOptions): Matrix4x4 {
+    static frustum(options: {top: number, bottom: number, left: number, right: number, near: number, far: number}): Matrix4x4 {
         const top: number = options.top;
         const bottom: number = options.bottom;
         const left: number = options.left;
@@ -368,7 +341,8 @@ export class Matrix4x4 implements Matrix {
         );
     }
 
-    static perspective(options: PerspectiveOptions): Matrix4x4 {
+
+    static perspective(options: {fovYRadian: number, aspectRatio: number, near: number, far: number}): Matrix4x4 {
         const top = options.near * Math.tan(options.fovYRadian * 0.5);
         const height = top * 2;
         const width = options.aspectRatio * height;

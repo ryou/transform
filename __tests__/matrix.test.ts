@@ -1,4 +1,4 @@
-import { Vector3, Matrix4x4, OrthographicOptions, FrustumOptions, PerspectiveOptions } from '../src';
+import { Vector3, Matrix4x4 } from '../src';
 
 const DELTA = 5;
 
@@ -185,15 +185,14 @@ describe('Matrix4', () => {
     });
 
     test('Projection Matrix Orthographic', () => {
-        const options: OrthographicOptions = {
+        const actual = Matrix4x4.orthographic({
             left   : -40,
             right  : 40,
             top    : 40,
             bottom : -40,
             near   : 30,
             far    : 150,
-        };
-        const actual = Matrix4x4.orthographic(options);
+        });
 
         const expectMatrix = new Matrix4x4(
             0.02500000037252903,0,0,0,
@@ -208,15 +207,14 @@ describe('Matrix4', () => {
     });
 
     test('Projection Matrix Frustum', () => {
-        const options: FrustumOptions = {
+        const actual = Matrix4x4.frustum({
             left   : -40,
             right  : 40,
             top    : 40,
             bottom : -40,
             near   : 30,
             far    : 150,
-        };
-        const actual = Matrix4x4.frustum(options);
+        });
 
         const expectMatrix = new Matrix4x4(
             0.75,0,0,0,
@@ -231,13 +229,12 @@ describe('Matrix4', () => {
     });
 
     test('Projection Matrix Perspective', () => {
-        const options: PerspectiveOptions = {
+        const actual = Matrix4x4.perspective({
             fovYRadian : (60 * Math.PI / 180),
             aspectRatio : 500 / 500,
             near : 30,
             far  : 300,
-        };
-        const actual = Matrix4x4.perspective(options);
+        });
 
         const expectMatrix = new Matrix4x4(
             1.7320507764816284,0,0,0,
