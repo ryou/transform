@@ -386,3 +386,7 @@ export class Matrix4x4 implements Matrix {
         })
     }
 }
+
+export const Matrix2 = Matrix2x2;
+export const Matrix3 = Matrix3x3;
+export const Matrix4 = Matrix4x4;
